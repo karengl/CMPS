@@ -1,2 +1,2 @@
 # CMPS
-Work for various CMPS classes taken
+Work for various CS classes taken at UCSC
