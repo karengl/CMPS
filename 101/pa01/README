@@ -1,0 +1,56 @@
+I have read and understood the Academic Misconduct Policy for
+Undergraduates, the related sections 102.01-102.016 and 105.15 of the
+UC Santa Cruz Student Policies and Regulations Handbook,
+and the related sections of the class syllabus.
+- Karen Lee kglee
+pa01
+
+I wrote this assignment using only permitted sources
+that do not require citation, according to the syllabus.
+
+pa01 is a graph program that takes the input from a file. The first line in a
+file is the length of the IntList, or the the max number on the x-axis. Every
+line after the first is the coordinates. The first number is the x-coordinate
+and the second number is the y-coordinate. The program takes the coordinates
+and places the y-coordinate along the correct index of the IntList. For example,
+(1, 3) would place the 3 in the index 1 of the array.
+
+The program requires graph01.c, intList.c, and intList.h to work. Makefile is
+not necessary, but is used to help compile the program and create an easy to
+use exectuable.
+
+To run the program, make an input file with the max x-axis number first, then
+the coordinates on each separate line. Type: "make" into the console to compile
+the need programs. Then type: "graph01 input.data", input.data being the input
+file.
+
+TEST Files
+test1.in:
+    Tests the parseEdge function with only one number on a line and a string
+    instead of two numbers as expected.
+    Output: edge error, exit status = 1
+        Bad edge: 2
+
+test2.in:
+    Tests what happens when the first line of a file does not only have a
+    single integer.
+    Output: line error, exit status = 1
+        Bad line 1: 1 5
+
+test3.in:
+    Tests the program using the expected input and format
+    Output: exit status = 0
+        Output matches graph.java output, correctly displays output
+
+test4.in:
+    Tests when n < 1.
+    Output: array error, exit status = 1
+        graph01.c differs from graph.java as C does not have exceptions like
+        Java. Had to manually make the program print an error and stop running
+        otherwise it would have kept on running.
+
+test5.in:
+    Tests 3 fields and more than 3 fields in a line
+    Output: edge error, exit status = 1
+        Bad edge: 5 8 3 4 test
+        Three fields in a line was fine, but not any more

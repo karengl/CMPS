@@ -1,0 +1,476 @@
+CMPS 101 Fall 2016       HANDOUT 04              Sep. 28, 2016
+
+1ST PROGRAM, Submit by Thurs, Oct. 6,  23:59:59 PM;
+(may be graded face-to-face in lab, but that is later)
+
+This file is /afs/cats.ucsc.edu/courses/cmps101-avg/ho04.txt on unix.ic.
+Throughout this handout and this class, "unix.ic" abbreviates
+"unix.ic.ucsc.edu", the Linux server provided by the campus.
+JBE 105 is a lab with workstations that have the same OS as unix.ic.
+
+ho04.txt is also in the Handouts directory on the class web page.
+The URL for the class web page is in the syllabus, ho01.pdf.
+
+This handout is lengthy because it reviews many topics that were supposed
+to be covered in prerequisite classes.  Later assignments will refer back
+to this one for many details, so hang on to this file.
+Use the search function in your editor to locate specific information.
+
+There is a lot to do besides write C code.  Start early.
+LATE SUBMISSIONS CANNOT BE ACCEPTED.
+Make some progress each day.  Attend scheduled labs for help.
+
+==========================================================================
+
+CERTIFICATION
+
+For your submission to receive a grade you must submit a file named
+README that has certain text near the beginning, as follows:
+
+1. The sentence:
+"I have read and understood the Academic Misconduct Policy for
+Undergraduates, the related sections 102.01-102.016 and 105.15 of the
+UC Santa Cruz Student Policies and Regulations Handbook,
+and the related sections of the class syllabus."
+followed by your name as a signature.
+
+The documents may be found at:
+    http://www.ue.ucsc.edu/academic_misconduct
+    http://deanofstudents.ucsc.edu/student-conduct/student-handbook
+        (scroll down and click on Section 100.00)
+    http://classes.soe.ucsc.edu/cmps101/Fall16/Handouts/ho01.pdf
+
+2. If the assignment was not written entirely by you, cite the sources you
+   used OTHER THAN those listed (as generalities) in the syllabus ho01.pdf
+   as permitted sources, or those mentioned specifically in the assignment.
+
+   DO NOT cite the text or handouts or files supplied for the class.
+
+   For any cited sources, state how they got included, whether it was
+   copy-paste, email, file copy, download, etc.
+
+   If you have nothing to list, write the sentence
+   "I wrote this assignment using only permitted sources
+   that do not require citation, according to the syllabus."
+
+After the above text, the rest of your README will be information
+about your submitted program.
+
+This rule is needed because many students copied from unauthorized
+sources and presented it as their own work in recent quarters.
+THIS IS PLAGIARISM.  Reread the syllabus (ho01.pdf) for more details.
+
+==========================================================================
+
+READING
+
+Read the text, sections 2.3.2, 7.2.3 and appendix A.2, for explanations of
+what the supplied graph.java is doing.  This will be partly covered
+in lectures before the assignment is due, and further in sections.
+
+Several online Unix tutorials are mentioned on the class web page.
+
+==========================================================================
+
+PROGRAM REQUIREMENTS
+
+The program will read all lines from a text (ascii) file using the
+facilities of fgets for C (see javaToC.pdf and "man fgets").
+
+The program will do exactly what graph.java does in the text appendix,
+except that you may (optionally) improve the appearance of the output.
+You should be able to get the entire java program, including all
+ADTs, libraries, whatever, from AppendixCode.tar in Handouts.
+Probably the Java program will run correctly with no changes.
+The above READING section tells you where to find documentation on
+what this program does.  Trying to figure it out from the code only is not
+recommended.
+
+Most of this handout is about how to go about the assignment.
+It does not repeat what is in the text appendix and other sections
+mentioned in READING above. It does not teach C.
+
+ONE OPTION is to get the Java program working, then convert it to C.
+Only the C version will get graded, however.
+So ANOTHER OPTION is to work directly on your C program, using the
+text and Java code as a guide.
+
+We'll follow the C convention of lowercase file names, but type names
+will remain capitalized.
+
+Give your binary compiled C program the name graph01.
+Your main source file should be named graph01.c.
+Your source file that IMPLEMENTS the IntList ADT should be named intList.c.
+The ADT header file is intList.h, supplied in the class locker, a directory
+named cmps101-avg.  The complete path is given in the syllabus and on
+the class web page and later in this handout.
+
+Reading input in C is trickier than it sounds, so don't wait too long to
+get started.  As a C program, this is a pretty simple warm-up to get some
+routines in place that you will need later.  Also, there is a lot to do
+besides write C code.
+
+==========================================================================
+
+INPUT FORMAT
+
+Input consists of a sequence of lines on ``standard input'' or in
+an ascii file (also called text file).
+The line formats are as described in the text appendix for graph.java.
+
+Standard input is called System.in for Java and stdin for C.
+We will use stdin to denote either case.
+
+End-of-file signals the end of input, and is typed on the keyboard
+as cntl-D in Unix (Linux is Unix; maybe cntl-Z in DOS, Windows, etc.).
+Disk files do not need an End-of-file character, though.
+
+Part of the assignment is to create a set of useful test files on disk.
+
+In the class locker (see below) gr01_test1.in is an example input.
+
+==========================================================================
+
+OUTPUT FORMAT
+
+Running graph.java on example inputs is the easiest way to see the
+expected output format.  What is most important is that the correct numbers
+in the correct sequence appear on each line.  The punctuation like commas
+and brackets is for human readability.
+
+A common convention in programming languages is that lists print as
+[4, 5, 1] for a list whose first element is 4, etc. [] is the empty list.
+For this assignment the entire list should print on a single line.
+
+When you run graph.java you will notice that a number appears on each
+line BEFORE the list.  That is explained in the reading material.
+
+==========================================================================
+
+INFORMATION SOURCES
+
+If you decide to implement this assignment first in Java, then convert
+that to C after it is working, all code in the Appendix is on-line,
+and may be used.  The subset of Java used is described in Ch. 1.2 (8 pp.)
+and the Appendix of the text.  See READING above.
+
+As advised in ho01.pdf (the first handout), to easily access the locker
+set up this symbolic link (colloquially called "soft link" or "s-link")
+in any directory that you are working in:
+
+    ln -s /afs/cats.ucsc.edu/courses/cmps101-avg .
+
+Don't forget the final dot, preceded by a space. ^^^
+If this does not work due to file-sytem changes, another form is:
+
+    ln -s ~avg/cmps101-avg .
+
+This points to my symbolic link.
+
+After this command, cmps101-avg appears to be a subdirectory, so you can
+do "pushd cmps101-avg" and you are in the class locker.
+
+Then you can do "popd" and you are back where you came from.
+
+Or you can do "pushd" again while in cmps101-avg.
+That command puts you back where you came from, and cmps101-avg
+is remembered on the directory stack.  This might sound confusing,
+but just try it and you will see what happens.
+Use "pwd" to check what your current working directory is.
+
+Notice that "cd cmps101-avg" would get you into cmps101-avg, but then
+"cd .." would NOT bring you back where you came from.
+So learn "pushd" by reading "man pushd" and get in the habit of using it.
+
+AppendixCode and Supplements are subdirectories in the class locker.
+
+There are usually quite a few questions and clarifications about programs
+on the "C101" mailing list, so keep up.  Consider the source when
+evaluating a message, because there is no screening of the postings.
+
+The class web page and the syllabus handout have a lot of "orientation"
+information.  Check them if you see things whose meaning is not clear.
+
+==========================================================================
+
+WORDS AND DELIMITERS
+
+In C, allocate a character array larger than you expect to need
+(e.g., 2000 characters).  Say you call this array "inbuff".
+
+Use fgets to get ONE input line into it.
+See javaToC.pdf for more details.
+Use the search funcion in pdf to find the fgets discussion.
+
+There are several ways to extract words from that line.
+javaToC.pdf gives an overly general, complicated approach, based on
+strtok_r() and strdup().  HOWEVER, these functions are complicated to use,
+and we do not need their generality.
+
+For this assignment we will use sscanf() to get the words out of the
+input line as stored in "inbuff" by fgets().
+
+The simplest, and quite common case is that you expect a specific
+sequence of words to be on the line.  Then one sscanf() call can extract
+the expected words, and its return code can be checked to see how many
+words were successfully extracted.
+Assume these declarations
+
+    int p, q;
+    double wgt;
+    char junk;
+    int sscanfRetn;
+
+The call might be
+
+    sscanfRetn = sscanf(inbuff, " %d %d %lf %c ", &p, &q, &wgt, &junk);
+
+Note the spaces between the quotes.
+
+If you are expecting a weighted graph, sscanfRetn should be 3;
+for an unweighted graph sscanfRetn should be 2; and any other
+value indicates the line is not formatted as expected.
+The function parseEdge() in the AppendixCode should be imitated, as it
+extracts both weighted and unweighted edges.  In C, parseEdge() should
+return a struct as shown in javaToC.pdf.
+
+==========================================================================
+
+HOW TO PROCEED
+
+Find the AppendixCode directory and make a soft link to it (ln -s ...),
+to make it easier to find again.  Become familiar with what files are
+there.
+
+Copy any java files that look useful to your own directory.
+They are all mentioned in the text appendix discussion of graph.java.
+They might help as starters even if you are working in C.
+
+(Note that ho05.txt has Unix commands and editor skills that you are
+expected to have to do this class work.  Take a look at that if you see
+terms that are unfamiliar in the ensuing discussion.  TAs will help
+you brush up EARLY in the quarter; then we expect you to be up to speed.)
+
+Make up several small test files, following the format described
+in the text appendix for graph.java.  Try to test a wide variety of
+conditions in the input.  In your README file, state what each test file
+is testing for.  It is best to do this BEFORE running your tests.
+Then you can go back and compare what you got with what you expected,
+and try to resolve discrepancies.
+
+To run graph.java you need to compile it first with javac, together with
+the associated java files it calls, in your own directory.
+We assume students learned this in a beginning course; if not,
+Appendix A.1 gives some URLs that may be obsolete, but there are many
+other sources.  After compiling, type
+
+    java graph mytest1.in
+
+to run the compiled program.  Making a jar file is not necessary.
+Keep it simple.
+
+==========================================================================
+
+CONVERTING FROM JAVA
+
+See some details in
+/afs/cats.ucsc.edu/courses/cmps101-avg/java-first-pa01.txt
+on unix.ic.
+
+We expect that few students will choose this course of action.
+
+==========================================================================
+
+DEVELOPING IN C
+
+The "meat" of many functions in graph.java and related files can be
+adapted to C with minor syntax changes.  This is perfectly proper for
+this class because it is class-supplied material.  Were you to use the code
+for some other class, where AppendixCode was not supplied, you should
+cite the source.  The same applies for  other contexts, such as research,
+a software package, etc.
+
+Read the manual javaToC.pdf in the Handouts directory.
+It explains common C functions, even if you are not converting from Java.
+Use the pdf search function to find specific topics.
+
+Read the manual c-adt.pdf in the class Locker or Handouts directory.
+It explains program organization techniques that you are expected to use.
+This has also be covered in lectures.
+
+Use "man ffff" to get documentation on ffff, where ffff is the name of a
+Unix command or a C library function.
+
+Here are some C library functions that are often used:
+fopen, printf or fprintf, fgets, feof, sscanf, atoi, atof,
+strncpy, strncat, strlen, sprintf, calloc.
+
+You should also know about the predefined objects of type FILE*
+named stdin, stdout, stderr.
+
+There is a sample Makefile and more information in the Cmake subdirectory
+of the class locker, along with examples of a C program with multiple
+source files.  Look carefully at the CFLAGS variable and how it is used.
+
+Your Makefile should produce a binary executable file named graph01,
+and compiled files (called "dot o files") named intList.o, graph01.o
+and possibly other ".o" files in response to the command "make".
+See the examples in Cmake.
+
+Use gcc on unix.ic and Linux workstations; this is the standard compiler
+that will determine grading.
+Use the flags "-std=c99 -D_SVID_SOURCE" to request the 1999 standard of C.
+
+On PCs, Microsoft and Borland are compatible, but they might have
+C extensions that don't exist in gcc.  Macs have gcc in their "Terminal"
+interface.  Your program needs to run on unix.ic, so stick to
+platform-independent C.
+
+In C, your program always has at least 1 argument, the program name.
+The first ``real'' argument, if any, is at index 1 of argv, the second
+parameter of main(int argc, char* argv[]).
+
+Learn the basics of gdb for debugging.  You may prefer some other
+debugger, which is fine, but do not assume it is installed on unix.ic.
+For gdb to be useful, your program must have debugging information
+compiled into it.
+
+When running any unix program, you can tell it to read stdin from
+filename instead of the terminal with "program args < filename".
+To print stdout to outfile.txt instead of the terminal,
+
+    program args > outfile.txt
+
+To do both, "program args < filename > outfile.txt".
+
+If outfile.txt exists and you have "noclobber" set you will need to
+do "rm outfile.txt" first or else do
+
+    program args < filename >! outfile.txt
+
+If you are confident about your unix, unset "noclobber" (if you don't
+know how, maybe you shouldn't do that yet).
+
+In our example, suppose littlegraph.txt is an input file you made.
+You should get the same results by each of these commands:
+
+	graph01 littlegraph.txt
+	graph01 - < littlegraph.txt
+	cat littlegraph.txt | graph01 -
+
+Be sure to include the "-" where shown in the above examples.
+
+There are many online tutorials on the basics of Unix or Linux.
+A few are mentioned on the class web page.
+
+==========================================================================
+
+SUBMITTING
+
+The assignment name is pa01.  An EXAMPLE "submit" command is:
+
+	submit cmps101-avg.f16 pa01  graph01.c  Makefile
+
+This is NOT the entire assignment!
+You can list as many files as you want to submit.
+
+If you update files, just submit them again.
+It is better not to resubmit unchanged files needlessly.
+
+The above example DOES NOT include all the files you need to submit;
+it just illustrates the format.  You should expect to do several submits
+as you get various parts completed.
+
+Submit a README that briefly describes your program with a few sentences,
+mainly to tell the reader how to run it, what test inputs and outputs
+you supplied, what the test inputs demonstrate, and mention any known bugs.
+If the purpose of some files might be mysterious, here is the place to
+explain them.
+All of this follows the required text mentioned at the beginning of this
+document.
+
+Pleading for a nice grade in your README is bad form.
+
+Be sure to submit all the source files you need for a "make" and
+be sure NOT TO SUBMIT JUNK that is not part of the assignment.
+
+Also, do not submit any "binary" files, such as *.o *.class or graph01
+itself.  The testing script will compile these from your submitted
+source files, using your submitted Makefile.
+
+Obviously, anything that you want to count toward your grade needs to be
+submitted.
+
+To verify if submit worked or check what files you have submitted, do:
+
+	~avg/cmps101-avg/peek.csh cmps101-avg.f16 pa01
+
+Learn how to shorten the string "~avg/cmps101-avg/peek.csh" to save time
+and trouble.  This is a valuable Unix skill.
+Note that peek.csh is a human-readable file, called a "script".
+
+To unsubmit a file you did not mean to submit (say mistake-file),
+make an empty file with that name, for example
+
+    mv mistake-file mistake-file-submitted
+    touch mistake-file
+    submit cmps101-avg.f16 pa01  mistake-file
+
+IN THIS CASE, "touch" makes a 0-byte file.
+We will not count your 0-byte file as junk.
+
+WHAT TO SUBMIT
+
+A minimum for the source code is graph01.c, intList.c and intList.h.
+You might break it down further.
+
+NOTE THAT THE SPELLING OF intList.c and intList.h must be exactly
+as shown.  The same applies for graph01.c.
+
+A starter intList.h is in the class locker, and is complete except
+for comments to be added by the student.
+In fact, you must not make any changes EXCEPT comments, because other
+students will be using your compiled intList.o, as compiled by the
+testing scripts.
+Your comments should document the functions declared in file.
+
+You must submit Makefile, and the commands "make" and "make graph01"
+should create intList.o, as well as a .o file for each .c file used,
+then link them into a binary named graph01.
+
+The Makefile should contain proper targets, sources and dependencies.
+An example is in the Cmake subdirectory of the class locker.
+
+Avoid using fancy features like wildcards, patterns, etc. that you might
+have been given in other classes.  A learning goal of the class is to
+understand the basics of how the "make" command works.
+
+You are expected to submit some test files that demonstrate that your
+program works as expected (or would so demonstrate if the program worked).
+
+You should submit a README, as described above.
+See the beginning of this assignment for the certifications expected
+in the README file.
+
+All files except test data should contain your name and CruzId (login).
+
+==========================================================================
+
+PROGRAMMING STANDARDS
+
+All code to be graded should follow good style practices including
+appropriate indentation, descriptive names, consistent capitalization,
+and useful comments.  Comments should indicate the purpose, preconditions,
+and postconditions of important procedures.
+
+Avoid comments of self-explanatory code.
+
+Programs will be subjected to testing and grading scripts for a first pass
+of grading, due to class size and very limited resources.
+When necessary a second pass of face-to-face grading with a reader might
+occur in a scheduled lab.
+
+The reader may grade your program low if it is sloppily done,
+making it hard to understand or follow.  Respect the reader's time.
+
+=========================================================================
