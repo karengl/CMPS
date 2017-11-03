@@ -1,6 +1,4 @@
-#CMPS 101
-
-(Fall 2016)
+#CMPS 101 (Fall 2016)
 
 Algorithms and Abstract Data Types
 
